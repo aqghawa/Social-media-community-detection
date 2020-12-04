@@ -33,5 +33,5 @@ def get_cluster():
     return render_template("cluster.html", result=result)
 
 
-# if __name__ == "__main__":
-app.run()
+if __name__ == "__main__":
+    app.run()
