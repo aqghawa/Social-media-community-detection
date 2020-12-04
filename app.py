@@ -30,7 +30,8 @@ def get_cluster():
     )
     df_cluster = df_cluster[["username", "tweet"]].sample(n=20)
     result=df_cluster.set_index("username").to_dict()["tweet"]
-    return render_template("cluster.html", result=result)
+    title=request.args.get('titles')
+    return render_template("cluster.html", result=result, title=title)
 
 
 if __name__ == "__main__":

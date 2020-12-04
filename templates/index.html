@@ -2,17 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dropdown</title>
+    <title>Social Media Detection</title>
+    <style>
+        * {
+            font-family: Helvetica;
+        }
+        .container {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <form method="GET" action="/cluster">
-        <select name=titles>
-            {% for title in titles %}
-            <option value= "{{title}}">{{title}}</option>"
-            {% endfor %}
-            <!--input type = "submit" value = "Submit" /-->
-        </select>
-        <button type="submit">Go</button>
-    </form>
+    <div class='container'>
+        <h1 class='center'>
+            Twitter Social Media Community Detection
+        </h1>
+        <h3>Data Preprocessing</h3>
+        <p>The <a href="https://www.kaggle.com/kazanova/sentiment140">original dataset</a> contained 1.6 million tweets. After running the model for hours, the dataset was trimmed to 50 thousand tweets. All tweets were cleaned from non-alphanumeric characters except '@'. TF-IDF was then applied to the dataset, discounting stop words in the process. </p>
+        <h3>Tests and Progression</h3>
+        <p>Initially, the project started with <a href="https://archive.org/details/twitter_cikm_2010">this dataset</a>. The goal was to use geolocation as a parameter in the model. Sadly the dataset was too corrupted and would need days of cleaning and refining. After deciding to scrap that dataset, the current dataset was found on Kaggle.
+            Since we could not use geolocation anymore, another methodology had to be implemented. </p>
+        <h3>Defintion of Community</h3>
+        <p>The new methodology required a slight change to the definition of a community.
+            A <b>"community"</b> is a group of people who talk or behave similarly.  </p>
+        <h3>Final Model</h3>
+        <p>Using the TF-IDF calculation, a K-means model was trained on the dataset producing the 50 clusters. Some of them are random, but others are really interesting! Have a look below.</p>
+        <h3>Future Improvements</h3>
+        <p>Studying one tweet for each user is not enough to characterize a person in a community. Therefore the next most logical step is to use the usernames to get more posts made by each user and to use it to train the model.
+            Another good idea is to remove common English words and see what happens. This would eliminate some of the categories below.
+            Finally, further cleaning of the dataset would help refine the results.</p>
+        <h3>Result</h3>
+        <p>
+            Each of the options below represents a cluster (ie community). A sample of 20 random posts from the selected community will be displayed. 
+        </p>
+        <form class="center" method="GET" action="/cluster">
+            <select name=titles>
+                {% for title in titles %}
+                <option value= "{{title}}">{{title}}</option>"
+                {% endfor %}
+                <!--input type = "submit" value = "Submit" /-->
+            </select>
+            <button type="submit">Go</button>
+        </form>
+    </div>
 </body>
 </html>
